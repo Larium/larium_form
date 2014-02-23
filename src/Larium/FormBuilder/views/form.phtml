@@ -1,0 +1,137 @@
+<!-- Error handling when using FormValidation -->
+<?php if (isset($form) && $form instanceof Larium\FormBuilder\FormValidation):?>
+    <?php $this->block('error', function($view){?>
+    <?php if (isset($view->form) && $view->form->elementHasErrors($view->element)):?>
+        <?php foreach($view->form->getError($view->element) as $index=>$message):?>
+        <span class="help-block"><?= $message ?></span>
+        <?php endforeach;?>
+    <?php endif;?>
+    <?php }) ?>
+<?php else:?>
+    <?php $this->block('error', function($view){})?>
+<?php endif;?>
+
+<!-- Button template -->
+<?php $this->block('button', function($view){?>
+<button<?=$view->element->attributes($view->attributes)?>><?= $view->name?></button>
+<?php }) ?>
+
+<!-- DateTime -->
+<?php $this->block('datetime_group', function($view){?>
+<?php $year_opt   = array_combine(range(2011, 2022),range(2011, 2022)); ?>
+<?php $month_opt  = array_combine(range(1, 12), range(1, 12)); ?>
+<?php $day_opt    = array_combine(range(1, 31), range(1, 31)); ?>
+<?php $hour_opt   = array_combine(range(0, 23), range(0, 23)); ?>
+<?php $minute_opt = array_combine(range(0, 59), range(0, 59)); ?>
+<?= $view->label ?>
+<?= $view->form->select('year', $year_opt) ?>
+<?= $view->form->select('month', $month_opt) ?>
+<?= $view->form->select('day', $day_opt) ?>
+<?= $view->form->select('hour', $hour_opt) ?>
+<?= $view->form->select('minute', $minute_opt) ?>
+<?php }) ?>
+
+<!-- Input types template -->
+<?php $this->block('input', function($view){?>
+<input<?= $view->element->attributes($view->attributes) ?> name="<?= $view->name ?>" value="<?= $view->value ?>" />
+<?php $view->block('error'); ?>
+<?php }) ?>
+
+<!-- Input types group template -->
+<?php $this->block('input_group', function($view){?>
+<?php
+/**
+ * Available variables:
+ * 
+ * @var Element   $label 
+ * @var Element   $input
+ * @var FormGroup $form
+ */
+?>
+<div class="control-group">
+    <?php $view->label->appendAttr('class', 'control-label'); ?>
+<?= $view->label ?>
+    <div class="controls">
+        <?= $view->raw($view->input) ?>
+    </div>
+</div>
+<?php }) ?>
+
+<!-- Label template -->
+<?php $this->block('label', function($view){?>
+<label<?= $view->element->attributes($view->attributes) ?>><?= $view->name ?></label>
+<?php }) ?>
+
+<!-- Select template -->
+<?php $this->block('select', function($view){?>
+<select name="<?= $view->name ?>"<?= $view->element->attributes($view->attributes) ?>>
+    <?= $view->raw($view->value) ?>
+</select>
+<?php $view->block('error'); ?>
+<?php }) ?>
+
+<!-- Select group template -->
+<?php $this->block('select_group', function($view){?>
+<?php
+/**
+ * Available variables:
+ * 
+ * @var Element   $label 
+ * @var Element   $select
+ * @var FormGroup $form
+ */
+?>
+<div class="control-group">
+    <?php $view->label->appendAttr('class', 'control-label'); ?>
+<?= $view->label; ?>
+    <div class="controls">
+        <?= $view->raw($view->select) ?>
+    </div>
+</div>
+<?php }) ?>
+
+<!-- Textarea template -->
+<?php $this->block('textarea', function($view){?>
+<textarea name="<?= $view->name ?>"<?= $view->element->attributes($view->attributes) ?>><?= $view->value ?></textarea>
+<?= $view->block('error') ?>
+<?php }) ?>
+
+<!-- Textarea group template -->
+<?php $this->block('textarea_group', function($view){?>
+<?php
+/**
+ * Available variables:
+ * 
+ * @var Element   $label 
+ * @var Element   $textarea
+ * @var FormGroup $form
+ */
+?>
+<div class="control-group">
+    <?php $view->label->appendAttr('class', 'control-label'); ?>
+    <?= $view->label ?>
+    <div class="controls">
+        <?= $view->raw($view->textarea) ?>
+    </div>
+</div>
+<?php }) ?>
+
+<!-- Checkbox group template -->
+<?php $this->block('checkbox_group', function($view){?>
+<?php
+/**
+ * Available variables:
+ * 
+ * @var Element   $label 
+ * @var Element   $checkbox
+ * @var FormGroup $form
+ */
+?>
+<div class="control-group">
+    <?php //var_dump($view->label)?>
+    <label for="<?= $view->checkbox->getAttr('id') ?>" <?= $view->label->attributes($view->label->getAttrs())?>>
+        <?= $view->raw($view->checkbox) ?>
+        <?= $view->label->getName() ?>
+    </label>
+</div>
+<?php }) ?>

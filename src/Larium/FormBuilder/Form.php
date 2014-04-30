@@ -108,7 +108,8 @@ class Form
         $name,
         $options = array(),
         $attrs = array(),
-        $add_empty = true
+        $add_empty = true,
+        $empty_label = null
     ) {
 
         $selected = $this->getValue($name);
@@ -119,7 +120,7 @@ class Form
             ? $attrs['id']
             : $this->createId($form_name);
 
-        $element = Element::{__FUNCTION__}($form_name, $options, $selected, $attrs, $add_empty);
+        $element = Element::{__FUNCTION__}($form_name, $options, $selected, $attrs, $add_empty, $empty_label);
         $element->setTag($name);
 
         return $this->return_element($element);
@@ -221,9 +222,17 @@ class Form
     {
         $getter = 'get'.ucfirst($property);
 
-        if (isset($this->class->$property)) {
+        if (property_exists($this->class, $property)) {
 
-            return $this->class->$property;
+            $prop = new \ReflectionProperty($this->class, $property);
+
+            if ($prop->isPublic()) {
+
+                return $this->class->$property;
+            } elseif (is_callable(array($this->class, $getter))) {
+
+                return $this->class->$getter();
+            }
 
         } elseif (is_callable(array($this->class, $getter))) {
 
@@ -244,7 +253,13 @@ class Form
     public function getFormName()
     {
         if (null !== $this->name) {
-            return $this->name;
+            $parts = explode('_', $this->name);
+            $prefix = array_shift($parts);
+            $body = "";
+            foreach($parts as $part) {
+                $body .= '['.$part.']';
+            }
+            return $prefix . $body;
         }
         $class = get_class($this->class);
         $class = str_replace('\\','', $class);

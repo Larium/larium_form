@@ -13,22 +13,23 @@ class Select extends Element
     protected $options = array();
 
     public function __construct(
-        $name, 
-        $options = array(), 
-        $selected = null, 
-        $attrs = array(), 
-        $add_empty = true)
-    {
+        $name,
+        $options = array(),
+        $selected = null,
+        $attrs = array(),
+        $add_empty = true,
+        $empty_label = null
+    ) {
         $this->name = $name;
-        
+
         $this->options = $options;
-        
+
         $this->attrs = $attrs;
 
         $html = array();
 
         if (true == $add_empty) {
-            $html[] = $this->option(null, null, $selected);
+            $html[] = $this->option($empty_label, null, $selected);
         }
 
         foreach ($options as $value => $label) {
@@ -52,8 +53,8 @@ class Select extends Element
     {
         $value = is_bool($value) ? (int) $value : $value;
 
-        $selected = ((string) $value == (string) $selected) 
-            ? 'selected' 
+        $selected = ((string) $value == (string) $selected)
+            ? 'selected'
             : null;
         $attrs = array('value' => $this->encode($value), 'selected'=>$selected);
 

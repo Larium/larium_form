@@ -1,0 +1,29 @@
+{
+    "name": "larium/form",
+    "description": "",
+    "keywords": ["forms", "builder"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andreas Kollaros",
+            "email": "andreaskollaros@ymail.com"
+        }
+    ],
+    "repositories": [
+        {
+            "url": "git@github.com:Larium/larium_template.git",
+            "type": "git"
+        }
+    ],
+    "require": {
+        "php": ">=5.3",
+        "larium/template": "*"
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-0": {
+            "Larium\\": "src/"
+        }
+    }
+}

@@ -173,7 +173,8 @@ class FormGroup extends Form
             'seconds' => $datetime->format('s'),
             'label' => $this->label($label, $name, $label_attrs),
             'year_options' => $year_option,
-            'name' => $name
+            'name' => $name,
+            'attrs' => $attrs
         );
 
         return $this->return_group('datetime_group', $assigns);
@@ -199,7 +200,8 @@ class FormGroup extends Form
             'day' => $datetime->format('d'),
             'label' => $this->label($label, $name, $label_attrs),
             'year_options' => $year_option,
-            'name' => $name
+            'name' => $name,
+            'attrs' => $attrs
         );
 
         return $this->return_group('date_group', $assigns);

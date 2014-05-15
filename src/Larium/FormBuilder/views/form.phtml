@@ -18,17 +18,28 @@
 
 <!-- DateTime -->
 <?php $this->block('datetime_group', function($view){?>
-<?php $year_opt   = array_combine(range(2011, 2022),range(2011, 2022)); ?>
+<?php $year_opt   = $view->year_options ?: array_combine(range(2011, 2022),range(2011, 2022)); ?>
 <?php $month_opt  = array_combine(range(1, 12), range(1, 12)); ?>
 <?php $day_opt    = array_combine(range(1, 31), range(1, 31)); ?>
 <?php $hour_opt   = array_combine(range(0, 23), range(0, 23)); ?>
 <?php $minute_opt = array_combine(range(0, 59), range(0, 59)); ?>
 <?= $view->label ?>
-<?= $view->form->select('year', $year_opt) ?>
-<?= $view->form->select('month', $month_opt) ?>
-<?= $view->form->select('day', $day_opt) ?>
-<?= $view->form->select('hour', $hour_opt) ?>
-<?= $view->form->select('minute', $minute_opt) ?>
+<?= $view->form->select($view->name.'_year', $year_opt) ?>
+<?= $view->form->select($view->name . '_month', $month_opt) ?>
+<?= $view->form->select($view->name . '_day', $day_opt) ?>
+<?= $view->form->select($view->name.'_hour', $hour_opt) ?>
+<?= $view->form->select($view->name.'_minute', $minute_opt) ?>
+<?php }) ?>
+
+<!-- Date -->
+<?php $this->block('date_group', function($view){?>
+<?php $year_opt   = $view->year_options ?: array_combine(range(2011, 2022),range(2011, 2022)); ?>
+<?php $month_opt  = array_combine(range(1, 12), range(1, 12)); ?>
+<?php $day_opt    = array_combine(range(1, 31), range(1, 31)); ?>
+<?= $view->label ?>
+<?= $view->form->select($view->name.'_year', $year_opt) ?>
+<?= $view->form->select($view->name . '_month', $month_opt) ?>
+<?= $view->form->select($view->name . '_day', $day_opt) ?>
 <?php }) ?>
 
 <!-- Input types template -->
@@ -42,8 +53,8 @@
 <?php
 /**
  * Available variables:
- * 
- * @var Element   $label 
+ *
+ * @var Element   $label
  * @var Element   $input
  * @var FormGroup $form
  */
@@ -75,8 +86,8 @@
 <?php
 /**
  * Available variables:
- * 
- * @var Element   $label 
+ *
+ * @var Element   $label
  * @var Element   $select
  * @var FormGroup $form
  */
@@ -101,8 +112,8 @@
 <?php
 /**
  * Available variables:
- * 
- * @var Element   $label 
+ *
+ * @var Element   $label
  * @var Element   $textarea
  * @var FormGroup $form
  */
@@ -121,8 +132,8 @@
 <?php
 /**
  * Available variables:
- * 
- * @var Element   $label 
+ *
+ * @var Element   $label
  * @var Element   $checkbox
  * @var FormGroup $form
  */

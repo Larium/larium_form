@@ -11,12 +11,24 @@ class FormClass
     public $password;
 
     protected $firstname;
-    
+
     protected $lastname;
 
     public $country;
 
     public $boolean = 1;
+
+    public $date;
+
+    public $date_year;
+
+    public $date_month;
+
+    public $date_day;
+
+    public $date_hour;
+
+    public $date_minute;
 
     public function getFirstname()
     {

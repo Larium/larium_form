@@ -3,7 +3,7 @@
     <?php $this->block('error', function($view){?>
     <?php if (isset($view->form) && $view->form->elementHasErrors($view->element)):?>
         <?php foreach($view->form->getError($view->element) as $index=>$message):?>
-        <span class="help-block"><?= $message ?></span>
+        <span class="help-block error-block"><?= $message ?></span>
         <?php endforeach;?>
     <?php endif;?>
     <?php }) ?>

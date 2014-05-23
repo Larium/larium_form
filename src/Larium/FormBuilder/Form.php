@@ -69,11 +69,11 @@ class Form
     /**
      * Creates a label html element.
      *
-     * @param mixed $name  The display tag for the label element.
-     * @param mixed $for   The html attribute `for`.
-     * @param array $attrs Html attributes for this element
+     * @param string $name  The display tag for the label element.
+     * @param string $for   The html attribute `for`.
+     * @param array  $attrs Html attributes for this element
      * @access public
-     * @return Element
+     * @return Element\Label
      */
     public function label($name, $for, $attrs = array())
     {
@@ -88,6 +88,15 @@ class Form
         return $this->return_element($element);
     }
 
+    /**
+     * Creates a textarea element
+     *
+     * @param string $name The name of textarea field assigned to class
+     *                     property.
+     * @param array $attrs Html attributes for this element
+     * @access public
+     * @return Element\Select
+     */
     public function textarea($name, $attrs = array())
     {
         $value = $this->getValue($name);
@@ -104,6 +113,22 @@ class Form
         return $this->return_element($element);
     }
 
+    /**
+     * Creates a select element
+     *
+     * @param string  $name        The name of textarea field assigned to class
+     *                             property.
+     * @param array   $options     An array with select element options. Key of array
+     *                             will be used as value for option, value of array
+     *                             will be used as option label.
+     * @param array   $attrs       Html attributes for this element.
+     * @param boolean $add_empty   Whether or not should be added an empty option
+     *                             element.
+     * @param string  $empty_label The label of empty option if $add_empty is
+     *                             true.
+     * @access public
+     * @return Element\Checkbox
+     */
     public function select(
         $name,
         $options = array(),
@@ -126,6 +151,19 @@ class Form
         return $this->return_element($element);
     }
 
+    /**
+     * Creates a checkbox element.
+     *
+     * @param string $name            The name of textarea field assigned to class
+     *                                property.
+     * @param array  $attrs           Html attributes for this element.
+     * @param mixed  $checked_value   The value to receive if checkbox is
+     *                                checked.
+     * @param mixed  $unchecked_value The value to receive if checkbox is
+     *                                unchecked.
+     * @access public
+     * @return Element\Checkbox
+     */
     public function checkbox(
         $name,
         $attrs = array(),
@@ -148,6 +186,16 @@ class Form
         return $this->return_element($element);
     }
 
+    /**
+     * Creates a radio element.
+     *
+     * @param mixed   $name     The name of textarea field assigned to class
+     *                          property
+     * @param boolean $checked  To define if current radio element is checked.
+     * @param array   $attrs    Html attributes for this element.
+     * @access public
+     * @return void
+     */
     public function radio($name, $checked = false, $attrs = array())
     {
         $value = $this->getValue($name);

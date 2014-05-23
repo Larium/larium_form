@@ -5,3 +5,4 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 require_once 'FormClass.php';
+require_once 'Topic.php';

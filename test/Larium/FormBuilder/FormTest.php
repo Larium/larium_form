@@ -68,4 +68,46 @@ class FormBuilderTest extends \PHPUnit_Framework_TestCase
 EOT;
         $this->expectOutputString($output.PHP_EOL);
     }
+
+    public function testCreateFormInstance()
+    {
+        $topic = new \Topic();
+
+        $topic->title = 'My topic';
+
+        $form = new Form($topic);
+
+        echo $form->label('Title', 'title');
+        echo $form->text('title');
+
+        echo $form->label('Content', 'content');
+        echo $form->textarea('content');
+
+        echo $form->label('Approved', 'approved');
+        echo $form->checkbox('approved');
+
+        echo $form->label('Category', 'category');
+
+        $options = ['Category 1', 'Category 2', 'Category 3'];
+        echo $form->select('category', $options);
+
+        $output = <<<EOT
+<label for="topic_title">Title</label>
+<input id="topic_title" type="text" name="topic[title]" value="My topic" />
+<label for="topic_content">Content</label>
+<textarea name="topic[content]" id="topic_content" rows="10" cols="30"></textarea>
+<label for="topic_approved">Approved</label>
+<input id="_topic_approved" type="hidden" name="topic[approved]" value="0" />
+<input id="topic_approved" type="checkbox" name="topic[approved]" value="1" />
+<label for="topic_category">Category</label>
+<select name="topic[category]" id="topic_category">
+    <option value="" selected="selected"></option>
+    <option value="0">Category 1</option>
+    <option value="1">Category 2</option>
+    <option value="2">Category 3</option>
+</select>
+EOT;
+
+        $this->expectOutputString($output.PHP_EOL);
+    }
 }

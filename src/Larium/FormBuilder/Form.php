@@ -333,4 +333,15 @@ class Form
 
         return $element;
     }
+
+    /**
+     * Gets class.
+     *
+     * @access public
+     * @return mixed
+     */
+    public function getClass()
+    {
+        return $this->class;
+    }
 }

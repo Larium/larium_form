@@ -31,12 +31,22 @@
 <?= $view->form->select($view->name.'_minute', $minute_opt, $view->attrs, false) ?>
 <?php }) ?>
 
-<!-- Date -->
+<!-- DateGroup -->
 <?php $this->block('date_group', function($view){?>
 <?php $year_opt   = $view->year_options ?: array_combine(range(2011, 2022),range(2011, 2022)); ?>
 <?php $month_opt  = array_combine(range(1, 12), range(1, 12)); ?>
 <?php $day_opt    = array_combine(range(1, 31), range(1, 31)); ?>
 <?= $view->label ?>
+<?= $view->form->select($view->name.'_year', $year_opt, $view->attrs, false) ?>
+<?= $view->form->select($view->name . '_month', $month_opt, $view->attrs, false) ?>
+<?= $view->form->select($view->name . '_day', $day_opt, $view->attrs, false) ?>
+<?php }) ?>
+
+<!-- Date -->
+<?php $this->block('date', function($view){?>
+<?php $year_opt   = $view->year_options ?: array_combine(range(2011, 2022),range(2011, 2022)); ?>
+<?php $month_opt  = array_combine(range(1, 12), range(1, 12)); ?>
+<?php $day_opt    = array_combine(range(1, 31), range(1, 31)); ?>
 <?= $view->form->select($view->name.'_year', $year_opt, $view->attrs, false) ?>
 <?= $view->form->select($view->name . '_month', $month_opt, $view->attrs, false) ?>
 <?= $view->form->select($view->name . '_day', $day_opt, $view->attrs, false) ?>

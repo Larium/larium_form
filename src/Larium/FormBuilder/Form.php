@@ -256,6 +256,48 @@ class Form
         return $this->return_element($element);
     }
 
+    public function date(
+        $name,
+        array $attrs=array(),
+        array $year_option=array(),
+        array $month_option=array(),
+        array $day_option=array()
+    ) {
+        $datetime = $this->getValue($name)
+            ? new \DateTime($this->getValue($name))
+            : new \DateTime();
+
+        $assigns = array(
+            'year' => $datetime->format('Y'),
+            'month' => $datetime->format('m'),
+            'day' => $datetime->format('d'),
+            'year_options' => $year_option,
+            'name' => $name,
+            'attrs' => $attrs
+        );
+
+        return $this->return_grouped_element('date', $assigns);
+    }
+
+    protected function return_grouped_element($file, $assigns = array())
+    {
+        $render = new Render($this->getPath());
+
+        if (!file_exists($this->getPath() . 'form' . $render->getEngine()->getExtension())) {
+            $render->getEngine()->setPath(dirname(__FILE__) . '/views/');
+        }
+        $render->getEngine()->assign('form', $this);
+
+        $render->getEngine()->render('form', $assigns);
+
+        ob_start();
+        $render->getEngine()->block($file);
+        $template = ob_get_clean();
+
+        return $template;
+    }
+
+
     /**
      * Searches the self::$class for the given $property and return its value.
      *

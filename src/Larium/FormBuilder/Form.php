@@ -310,7 +310,7 @@ class Form
      */
     public function getValue($property)
     {
-        $getter = 'get'.ucfirst($property);
+        $getter = 'get'.str_replace(' ', '', ucwords(str_replace('_', ' ', $property)));;
 
         if (property_exists($this->class, $property)) {
 

@@ -54,22 +54,22 @@ class Select extends Element
         $value = is_bool($value) ? (int) $value : $value;
 
         if (is_array($selected)) {
+            $selection = null;
             foreach($selected as $select) {
                 if (((string) $value == (string) $select)) {
-                    $selected = 'selected';
+                    $selection = 'selected';
                     break;
                 } else {
-                    $selected = null;
+                    $selection = null;
                 }
             }
         } else {
-            $selected = ((string) $value == (string) $selected)
+            $selection = ((string) $value == (string) $selected)
                 ? 'selected'
                 : null;
         }
 
-
-        $attrs = array('value' => $this->encode($value), 'selected'=>$selected);
+        $attrs = array('value' => $this->encode($value), 'selected'=>$selection);
 
         return '<option'.$this->attributes($attrs).'>'
             .$this->encode($label).'</option>'.PHP_EOL;

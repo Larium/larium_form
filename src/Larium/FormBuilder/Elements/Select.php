@@ -53,13 +53,31 @@ class Select extends Element
     {
         $value = is_bool($value) ? (int) $value : $value;
 
-        $selected = ((string) $value == (string) $selected)
-            ? 'selected'
-            : null;
+        if (is_array($selected)) {
+            foreach($selected as $select) {
+                if (((string) $value == (string) $select)) {
+                    $selected = 'selected';
+                    break;
+                } else {
+                    $selected = null;
+                }
+            }
+        } else {
+            $selected = ((string) $value == (string) $selected)
+                ? 'selected'
+                : null;
+        }
+
+
         $attrs = array('value' => $this->encode($value), 'selected'=>$selected);
 
         return '<option'.$this->attributes($attrs).'>'
             .$this->encode($label).'</option>'.PHP_EOL;
+    }
+
+    private function resolve_selected($value, $selected)
+    {
+
     }
 
     protected function optgroup($label, $options, $selected)

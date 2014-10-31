@@ -139,7 +139,7 @@ class Form
 
         $selected = $this->getValue($name);
 
-        $form_name = $this->createName($name, __FUNCTION__);
+        $form_name = $this->createName($name, __FUNCTION__, array_key_exists('multiple', $attrs));
 
         $attrs['id'] = isset($attrs['id'])
             ? $attrs['id']
@@ -332,10 +332,14 @@ class Form
         throw new \InvalidArgumentException(get_class($this->class) . "::{$property} does not exists.");
     }
 
-    public function createName($property, $type)
+    public function createName($property, $type, $multiple = false)
     {
         if ($type !== 'file') {
-            return $this->getFormName() . "[$property]";
+            if ($multiple) {
+                return $this->getFormName() . "[$property][]";
+            } else {
+                return $this->getFormName() . "[$property]";
+            }
         }
         return $property;
     }
